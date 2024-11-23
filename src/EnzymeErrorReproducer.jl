@@ -12,16 +12,18 @@ myhvp(f, x, dx) = return autodiff(Forward, mygradient, Const(f), Duplicated(x, d
 
 @inline function arraycube_bad(x::AbstractArray{N}) where {N}
     y = similar(x)
-    @inbounds @simd for i in CartesianIndices(y)
-        y[i] = x[i]^3
+    for i in axes(y, 1)
+        for j in axes(y, 2)
+            y[i, j] = x[i, j]^3
+        end
     end
     return y
 end
 
 @inline function arraycube_good(x)
     y = similar(x)
-    @inbounds for i in CartesianIndices(y)
-        y[i] = x[i]^3
+    for k in eachindex(y)
+        y[k] = x[k]^3
     end
     return y
 end

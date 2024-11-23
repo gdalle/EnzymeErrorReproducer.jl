@@ -1,0 +1,10 @@
+name = "EnzymeErrorReproducer"
+uuid = "a400dc22-ae69-488e-a128-e3eb4848de9f"
+authors = ["Guillaume Dalle <22795598+gdalle@users.noreply.github.com>"]
+version = "0.1.0"
+
+[deps]
+Enzyme = "7da242da-08ed-463a-9acd-ee780be4f1d9"
+
+[compat]
+Enzyme = "0.13.16"

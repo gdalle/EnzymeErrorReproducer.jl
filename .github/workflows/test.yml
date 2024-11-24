@@ -21,6 +21,11 @@ jobs:
           version: 1.11
       - uses: julia-actions/cache@v2
       - uses: julia-actions/julia-buildpkg@v1
-      - uses: julia-actions/julia-runtest@v1
-        # with:
-        #   annotate: true
+      - name: Tests with check_bounds=yes
+        uses: julia-actions/julia-runtest@v1
+        with:
+          check_bounds: 'yes'
+      - name: Tests with check_bounds=no
+        uses: julia-actions/julia-runtest@v1
+        with:
+          check_bounds: 'no'

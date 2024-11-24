@@ -13,11 +13,15 @@ permissions:
 
 jobs:
   test:
-    name: test --check-bounds=${{ matrix.boundscheck }} 
+    name: test ${{ matrix.function }} --check-bounds=${{ matrix.boundscheck }} 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         boundscheck: ['yes', 'no']
+        function: ['good', 'bad']
+    env:
+      JULIA_HVP_FUNCTION: ${{ matrix.function }}
     steps:
       - uses: actions/checkout@v4
       - uses: julia-actions/setup-julia@v2

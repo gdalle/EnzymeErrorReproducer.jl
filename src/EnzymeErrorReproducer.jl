@@ -32,9 +32,10 @@ f_bad(x) = sum(arraycube_bad(x))
 f_good(x) = sum(arraycube_good(x))
 
 inputs() = Matrix{Float64}(reshape(1:12, 4, 3)), ones(4, 3)
+outputs() = 6084.0, Matrix{Float64}(6 .* reshape(1:12, 4, 3))
 
 export f_bad, f_good
 export myhvp
-export inputs
+export inputs, outputs
 
 end # module EnzymeErrorReproducer

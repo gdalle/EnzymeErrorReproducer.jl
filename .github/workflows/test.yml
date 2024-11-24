@@ -13,7 +13,11 @@ permissions:
 
 jobs:
   test:
+    name: test --check-bounds=${{ matrix.boundscheck }} 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        boundscheck: ['yes', 'no']
     steps:
       - uses: actions/checkout@v4
       - uses: julia-actions/setup-julia@v2
@@ -21,11 +25,6 @@ jobs:
           version: 1.11
       - uses: julia-actions/cache@v2
       - uses: julia-actions/julia-buildpkg@v1
-      - name: Tests with check_bounds=no
-        uses: julia-actions/julia-runtest@v1
+      - uses: julia-actions/julia-runtest@v1
         with:
-          check_bounds: 'no'
-      - name: Tests with check_bounds=yes
-        uses: julia-actions/julia-runtest@v1
-        with:
-          check_bounds: 'yes'
+          check_bounds: ${{ matrix.boundscheck }}

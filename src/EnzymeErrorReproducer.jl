@@ -2,11 +2,6 @@ module EnzymeErrorReproducer
 
 using Enzyme
 
-Enzyme.API.printall!(true)
-Enzyme.Compiler.DumpPreEnzyme[] = true
-Enzyme.Compiler.DumpPostWrap[] = true
-Enzyme.Compiler.DumpPostOpt[] = true
-
 function mygradient(f, x)
     g = zero(x)
     autodiff(Reverse, f, Active, Duplicated(x, g))

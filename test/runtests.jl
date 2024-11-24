@@ -1,3 +1,9 @@
+using Enzyme
+Enzyme.API.printall!(true)
+Enzyme.Compiler.DumpPreEnzyme[] = true
+Enzyme.Compiler.DumpPostWrap[] = true
+Enzyme.Compiler.DumpPostOpt[] = true
+
 using EnzymeErrorReproducer
 using Test
 

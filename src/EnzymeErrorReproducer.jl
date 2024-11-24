@@ -3,7 +3,7 @@ module EnzymeErrorReproducer
 using Enzyme
 
 function mygradient(f, x)
-    g = make_zero(x)
+    g = zero(x)
     autodiff(Reverse, f, Active, Duplicated(x, g))
     return g
 end
@@ -12,8 +12,8 @@ myhvp(f, x, dx) = return autodiff(Forward, mygradient, Const(f), Duplicated(x, d
 
 @inline function arraycube_bad(x::AbstractArray{N}) where {N}
     y = similar(x)
-    for i in axes(y, 1)
-        for j in axes(y, 2)
+    for i in 1:4
+        for j in 1:3
             y[i, j] = x[i, j]^3
         end
     end
@@ -22,7 +22,7 @@ end
 
 @inline function arraycube_good(x)
     y = similar(x)
-    for k in eachindex(y)
+    for k in 1:12
         y[k] = x[k]^3
     end
     return y

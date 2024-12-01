@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         boundscheck: ['yes', 'no']
-        function: ['good', 'bad']
+        function: ['cartesian', 'linear']
     env:
       JULIA_HVP_FUNCTION: ${{ matrix.function }}
     steps:

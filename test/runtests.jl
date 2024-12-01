@@ -1,26 +1,27 @@
 using Enzyme
+
 Enzyme.API.printall!(false)
 Enzyme.Compiler.DumpPreEnzyme[] = true
-Enzyme.Compiler.DumpPostWrap[] = true
-Enzyme.Compiler.DumpPostOpt[] = true
+Enzyme.Compiler.DumpPostWrap[] = false
+Enzyme.Compiler.DumpPostOpt[] = false
 
 using EnzymeErrorReproducer
 using Test
 
-FUNCTION = get(ENV, "JULIA_HVP_FUNCTION", "bad")
+FUNCTION = get(ENV, "JULIA_HVP_FUNCTION", "cartesian")
 
 @testset verbose = true "EnzymeErrorReproducer" begin
     x, dx = inputs()
     y, h = outputs()
-    if FUNCTION == "bad"
-        @testset "f_bad" begin
-            @test f_bad(x) == y
-            @test myhvp(f_bad, x, dx) == h
+    if FUNCTION == "cartesian"
+        @testset "f_cartesian" begin
+            @test f_cartesian(x) == y
+            @test myhvp(f_cartesian, x, dx) == h
         end
     elseif FUNCTION == "good"
-        @testset "f_good" begin
-            @test f_good(x) == y
-            @test myhvp(f_good, x, dx) == h
+        @testset "f_linear" begin
+            @test f_linear(x) == y
+            @test myhvp(f_linear, x, dx) == h
         end
     else
         error("Unknown function $FUNCTION")

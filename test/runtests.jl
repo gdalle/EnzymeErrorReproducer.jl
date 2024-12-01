@@ -18,7 +18,7 @@ FUNCTION = get(ENV, "JULIA_HVP_FUNCTION", "cartesian")
             @test f_cartesian(x) == y
             @test myhvp(f_cartesian, x, dx) == h
         end
-    elseif FUNCTION == "good"
+    elseif FUNCTION == "linear"
         @testset "f_linear" begin
             @test f_linear(x) == y
             @test myhvp(f_linear, x, dx) == h

@@ -28,8 +28,19 @@ end
     return y
 end
 
-f_cartesian(x) = sum(arraycube_cartesian(x))
-f_linear(x) = sum(arraycube_linear(x))
+@inline function mysum(x)
+    return Base._mapreduce(identity, +, IndexLinear(), x)
+end
+
+function f_cartesian(x)
+    c = arraycube_cartesian(x)
+    return mysum(c)
+end
+
+function f_linear(x)
+    c = arraycube_linear(x)
+    return mysum(c)
+end
 
 inputs() = Matrix{Float64}(reshape(1:6, 2, 3)), ones(2, 3)
 outputs() = 441.0, Matrix{Float64}(6 .* reshape(1:6, 2, 3))
